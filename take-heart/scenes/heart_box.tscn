@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://vd7s7l10hwy0"]
+
+[ext_resource type="Script" path="res://scenes/heart_box.gd" id="1_y2nrg"]
+[ext_resource type="PackedScene" uid="uid://dhqtf41iqg8e4" path="res://scenes/full_heart.tscn" id="2_2w6ks"]
+[ext_resource type="PackedScene" uid="uid://qcw41vuou8cg" path="res://scenes/half_heart.tscn" id="3_gvx5p"]
+
+[node name="HeartBox" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/separation = 2
+script = ExtResource("1_y2nrg")
+
+[node name="FullHeart" parent="." instance=ExtResource("2_2w6ks")]
+layout_mode = 2
+
+[node name="HalfHeart" parent="." instance=ExtResource("3_gvx5p")]
+layout_mode = 2

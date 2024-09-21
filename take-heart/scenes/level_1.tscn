@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=4 uid="uid://c73hgjp8dm2t8"]
+
+[ext_resource type="TileSet" uid="uid://bg82epcoviasj" path="res://assets/Tiles/default-tile-set.tres" id="1_2tm36"]
+[ext_resource type="Texture2D" uid="uid://h55n6vcqk5wy" path="res://assets/character_0000.png" id="1_k23rn"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="2_ko106"]
+[ext_resource type="PackedScene" uid="uid://ci0g4lhnln7kf" path="res://scenes/heart_piece.tscn" id="4_3q2ji"]
+[ext_resource type="PackedScene" uid="uid://vd7s7l10hwy0" path="res://scenes/heart_box.tscn" id="4_nviyw"]
+[ext_resource type="Script" path="res://scenes/game_over_view.gd" id="6_c4cya"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsmqi"]
+height = 22.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5r3b"]
+font_size = 25
+
+[node name="Level1" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, -1)
+tile_map_data = PackedByteArray("AAACAAAAAAABAAUAAAADAAAAAAACAAUAAAAEAAAAAAACAAUAAAAFAAAAAAACAAUAAAAGAAAAAAACAAUAAAAHAAAAAAADAAUAAAAHAAEAAAADAAcAAAAGAAEAAAACAAcAAAAFAAEAAAACAAcAAAAEAAEAAAACAAcAAAADAAEAAAACAAcAAAACAAEAAAABAAcAAAAMAAAAAAACAAAAAAANAAAAAAACAAAAAAAOAAAAAAADAAAAAAAOAP//AAARAAYAAAAOAP7/AAAQAAQAAAAOAP3/AAAQAAMAAAAOAPz/AAAQAAEAAAD9//7/AAABAAIAAAD+//7/AAACAAIAAAD///7/AAACAAIAAAAAAP7/AAACAAIAAAABAP7/AAADAAIAAAALAAMAAAABAAQAAAAMAAMAAAACAAQAAAANAAMAAAACAAQAAAAOAAMAAAADAAQAAAARAAMAAAARAAAAAAARAAQAAAARAAEAAAARAAUAAAARAAIAAAASAAMAAAASAAAAAAASAAQAAAASAAEAAAASAAUAAAARAAQAAAATAAMAAAATAAAAAAATAAQAAAATAAEAAAATAAUAAAATAAIAAAASAAYAAAARAAUAAAASAAcAAAARAAYAAAAQAAgAAAABAAAAAAARAAgAAAACAAAAAAASAAgAAAACAAAAAAATAAgAAAACAAAAAAAUAAgAAAACAAAAAAAVAAgAAAACAAAAAAAWAAgAAAACAAAAAAAXAAgAAAACAAAAAAAYAAgAAAACAAAAAAAZAAgAAAADAAAAAAAGAAQAAAACAAIAAAAIAAQAAAADAAIAAAAHAAQAAAACAAIAAAAFAAQAAAACAAIAAAAEAAQAAAACAAIAAAADAAQAAAABAAIAAAAYAAcAAAAJAAEAAAAZAAYAAAAJAAEAAAAaAAUAAAAJAAEAAAAbAAQAAAAJAAEAAAAcAAMAAAABAAEAAAAdAAMAAAACAAEAAAAeAAMAAAACAAEAAAAfAAMAAAADAAEAAAAaAAAAAAABAAIAAAAcAAAAAAADAAIAAAAbAAAAAAACAAIAAAAVAP//AAANAAUAAAAWAP//AAANAAYAAAAXAP//AAAOAAYAAAAVAP7/AAAPAAUAAAAVAP3/AAAOAAQAAAASAP3/AAANAAYAAAATAP3/AAANAAYAAAAUAP3/AAAOAAYAAAAQAP3/AAAMAAYAAAARAP3/AAANAAYAAAD7/wEAAAANAAYAAAD8/wEAAAANAAYAAAD9/wEAAAAOAAYAAAD6/wEAAAAMAAYAAAD4/wEAAAANAAUAAAD5/wEAAAANAAYAAAD4/wAAAAAPAAUAAAD4////AAAOAAQAAAAfAAEAAAAJAAEAAAD3////AAAMAAYAAAD8/wcAAAACAAAAAAD9/wcAAAACAAAAAAD+/wcAAAACAAAAAAD//wcAAAACAAAAAAAAAAcAAAACAAAAAAABAAcAAAADAAAAAAACAAUAAAAJAAEAAAD7/wcAAAACAAAAAAD6/wcAAAACAAAAAAD5/wcAAAACAAAAAAD4/wcAAAACAAAAAAD3/wcAAAACAAAAAAD2/wcAAAABAAAAAAD5/wYAAAAJAAEAAAD4/wYAAAAJAAEAAAD5/wUAAAAJAAEAAAD6/wYAAAAJAAEAAAALAAAAAAACAAAAAAAKAAAAAAABAAAAAAA=")
+tile_set = ExtResource("1_2tm36")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(89, -12)
+script = ExtResource("2_ko106")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_k23rn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_bsmqi")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="HeartBox" parent="Player/CanvasLayer" instance=ExtResource("4_nviyw")]
+unique_name_in_owner = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Player"]
+
+[node name="GameOverView" type="Control" parent="Player/CanvasLayer2"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_c4cya")
+
+[node name="Panel" type="Panel" parent="Player/CanvasLayer2/GameOverView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/CanvasLayer2/GameOverView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Player/CanvasLayer2/GameOverView/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Over
+"
+label_settings = SubResource("LabelSettings_h5r3b")
+
+[node name="HeartBox" parent="Player/CanvasLayer2/GameOverView/VBoxContainer" instance=ExtResource("4_nviyw")]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RestartButton" type="Button" parent="Player/CanvasLayer2/GameOverView/VBoxContainer"]
+process_mode = 2
+layout_mode = 2
+text = "Restart"
+
+[node name="LeftHearts" type="Node2D" parent="."]
+
+[node name="HeartPiece" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+
+[node name="HeartPiece2" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(224, 45)
+
+[node name="HeartPiece3" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(401, 131)
+
+[node name="HeartPiece4" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(492, -11)
+
+[node name="HeartPiece5" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(338, -71)
+
+[node name="HeartPiece6" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(-95, 4)
+
+[node name="HeartPiece7" parent="LeftHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(-158, 116)
+
+[node name="RightHearts" type="Node2D" parent="."]
+
+[node name="RightHeartPiece2" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(122, -10)
+heart_type = 1
+
+[node name="RightHeartPiece3" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(221, -10)
+heart_type = 1
+
+[node name="RightHeartPiece4" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(331, 43)
+heart_type = 1
+
+[node name="RightHeartPiece5" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(102, 62)
+heart_type = 1
+
+[node name="RightHeartPiece7" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(-27, 114)
+heart_type = 1
+
+[node name="RightHeartPiece6" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(549, 42)
+heart_type = 1
+
+[node name="RightHeartPiece1" parent="RightHearts" instance=ExtResource("4_3q2ji")]
+position = Vector2(411, -31)
+heart_type = 1
+
+[connection signal="pressed" from="Player/CanvasLayer2/GameOverView/VBoxContainer/RestartButton" to="Player/CanvasLayer2/GameOverView" method="_on_restart_button_pressed"]

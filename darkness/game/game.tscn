@@ -1,0 +1,127 @@
+[gd_scene load_steps=7 format=3 uid="uid://c38nh5pxve3bi"]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_bi4ae"]
+[ext_resource type="Texture2D" uid="uid://bvq4jclkip8di" path="res://assets/backgroundCastles.png" id="1_yr7bt"]
+[ext_resource type="Texture2D" uid="uid://bcra5imnws4a4" path="res://assets/tile_0131.png" id="3_l7i58"]
+[ext_resource type="Texture2D" uid="uid://cu6nyn8dhm2fp" path="res://assets/tile_0129.png" id="4_3jv6h"]
+[ext_resource type="Texture2D" uid="uid://ccejvk2io11g6" path="res://assets/tile_0130.png" id="4_23kfl"]
+[ext_resource type="Texture2D" uid="uid://g58c8pc4mab7" path="res://assets/tile_0132.png" id="5_4iq34"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_bi4ae")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(550.5, 321)
+scale = Vector2(1.0752, 1)
+texture = ExtResource("1_yr7bt")
+region_rect = Rect2(0, 0, 1100, 1100)
+
+[node name="DarknessLayer" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1200.0
+offset_bottom = 800.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.376471)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 83.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 20
+text = "Score: 
+"
+
+[node name="ClicksLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 198.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 20
+text = "Clicks Remaining: "
+
+[node name="WinLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 167.0
+offset_bottom = 258.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 66
+text = "Darkness Achieved"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 291.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Final Score: 
+x"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="SunButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("3_l7i58")
+texture_pressed = ExtResource("5_4iq34")
+stretch_mode = 5
+
+[node name="MagicButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("4_23kfl")
+texture_pressed = ExtResource("5_4iq34")
+stretch_mode = 5
+
+[node name="PortalButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("4_3jv6h")
+texture_pressed = ExtResource("5_4iq34")
+stretch_mode = 5
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/SunButton" to="." method="_on_sun_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/MagicButton" to="." method="_on_magic_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/PortalButton" to="." method="_on_portal_button_pressed"]

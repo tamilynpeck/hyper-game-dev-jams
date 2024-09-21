@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://sbacv7chivxh"]
+
+[ext_resource type="Texture2D" uid="uid://badsldkcxkrcx" path="res://assets/tile_0045.png" id="1_p6wis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qx8il"]
+radius = 7.28011
+
+[node name="LeftHeart" type="Area2D" groups=["left_heart"]]
+position = Vector2(50, 180)
+scale = Vector2(4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_p6wis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qx8il")
